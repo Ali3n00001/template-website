@@ -8,8 +8,12 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font-family: system-ui, sans-serif;
-  background: #f4f4f4;
+  font-family: Calibri, "Helvetica Neue", Arial, sans-serif;
+  background-color: #f4f4f4;
+  background-image: url("animation/37572.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   color: #554f4f;
 }
 
@@ -17,6 +21,40 @@ h1 {
   text-align: center;
   padding: 2rem 1rem;
   font-size: 4rem;
+  font-family: Peignot, sans-serif;
+  animation: heading-fade 12s ease-out forwards;
+}
+
+.clock-widget {
+  position: fixed;
+  top: 1.25rem;
+  right: 1.25rem;
+  z-index: 10;
+  width: clamp(125px, 17vw, 190px);
+}
+
+.clock-face {
+  display: block;
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  height: auto;
+}
+
+.clock {
+  position: absolute;
+  top: 45.2%;
+  left: 27.8%;
+  display: flex;
+  width: 39%;
+  height: 17%;
+  align-items: center;
+  justify-content: center;
+  font-family: "FF Meta", "Helvetica Neue", Arial, sans-serif;
+  font-size: clamp(0.55rem, 1vw, 0.875rem);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  color: #554f4f;
 }
 
 h2 {
@@ -42,7 +80,147 @@ main {
 
 img {
   display: block;
-  max-width: 60vw;
-  max-height: 40vh;
+  max-width: min(60vw, 900px);
+  max-height: 55vh;
   object-fit: contain;
+}
+
+.artwork {
+  opacity: 0;
+  transform: translateY(120vh) scale(0.85);
+  will-change: transform, opacity;
+}
+
+.left-controls {
+  position: fixed;
+  top: 50%;
+  left: clamp(1.25rem, 5vw, 4rem);
+  z-index: 10;
+  display: flex;
+  width: clamp(100px, min(18vw, 22vh), 220px);
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5rem;
+  background: #fff;
+  transform: translateY(-50%);
+}
+
+.artwork-trigger {
+  position: relative;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.clock-trigger {
+  margin-bottom: -40%;
+}
+
+.artwork-trigger img {
+  display: block;
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  height: auto;
+}
+
+.artwork-trigger:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+.artwork.is-entering {
+  animation: artwork-reveal 3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.bottom-artwork {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  z-index: 5;
+  width: min(60vw, 900px);
+  height: auto;
+  max-width: none;
+  max-height: none;
+  transform: translate(-50%, 100%);
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+  transition:
+    transform 1.8s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s ease;
+}
+
+.bottom-artwork.is-visible {
+  transform: translate(-50%, 8%);
+  opacity: 1;
+}
+
+.compass-artwork {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  z-index: 6;
+  width: min(60vw, 900px);
+  height: auto;
+  max-width: none;
+  max-height: none;
+  transform: translate(-50%, 100%);
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+  transition:
+    transform 1.8s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.3s ease;
+}
+
+.compass-artwork.is-visible {
+  transform: translate(-50%, 8%);
+  opacity: 1;
+}
+
+@keyframes artwork-reveal {
+  0% {
+    opacity: 0;
+    transform: translateY(120vh) scale(0.85);
+  }
+  12% {
+    opacity: 1;
+  }
+  58% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(0) scale(3);
+  }
+}
+
+@keyframes heading-fade {
+  to {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  h1 {
+    animation: none;
+  }
+
+  .artwork.is-entering {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .bottom-artwork {
+    transition: none;
+  }
+
+  .compass-artwork {
+    transition: none;
+  }
 }

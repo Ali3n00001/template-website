@@ -86,6 +86,8 @@ img {
 }
 
 .artwork {
+  max-width: min(80vw, 1200px);
+  max-height: 70vh;
   opacity: 0;
   transform: translateY(120vh) scale(0.85);
   will-change: transform, opacity;
@@ -140,7 +142,7 @@ img {
   left: 50%;
   bottom: 0;
   z-index: 5;
-  width: min(60vw, 900px);
+  width: min(80vw, 1200px);
   height: auto;
   max-width: none;
   max-height: none;
@@ -163,7 +165,7 @@ img {
   left: 50%;
   bottom: 0;
   z-index: 6;
-  width: min(60vw, 900px);
+  width: min(80vw, 1200px);
   height: auto;
   max-width: none;
   max-height: none;
